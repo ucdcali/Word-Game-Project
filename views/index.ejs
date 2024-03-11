@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Word Search</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <h1><%= currentPlayer %></h1>
+  <!-- Form for theme input -->
+  <form action="/" method="GET">
+    <input type="text" name="theme" placeholder="Enter a theme (e.g., school)">
+    <select name="savedTheme" id="theme-dropdown">
+      <option value="">Select a theme</option>
+      <% if (currentPlayer.themes && currentPlayer.themes.length > 0) { %>
+      <% currentPlayer.themes.forEach(theme => { %>
+        <option value="<%= theme.theme %>"><%= theme.theme %></option>
+      <% }) } %>
+    </select>
+    <button type="submit">Generate Puzzle</button>
+  </form><br>
+  
+
+  <!-- Container for Puzzle Table and Word List -->
+  <div class="puzzle-container">
+    <!-- Word Search Puzzle Table -->
+    <table id="wordSearchTable">
+      <% grid.forEach((row, rowIndex) => { %>
+        <tr>
+          <% row.forEach((cell, cellIndex) => { %>
+            <td data-row="<%= rowIndex %>" data-col="<%= cellIndex %>" onclick='clickLetter(this)'><%= cell %></td>
+          <% }) %>
+        </tr>
+      <% }) %>
+    </table>
+
+
+    <!-- List of Words to Find -->
+    <div id="wordListContainer">
+      <h2>Words to find:</h2>
+      <% wordList.forEach(word => { %>
+          <p data-word="<%= word %>"><%= word %></p>
+      <% }) %>
+    </div>
+
+  </div>
+
+  <!-- Player selector -->
+  <br>
+  <div class="player-form-container">
+    <form action="/selectPlayer" method="POST">
+      <div class="dropdown-container">
+        <label for="existing-player">Choose an existing player:</label>
+        <select name="username" id="existing-player">
+          <option value="">Select player</option>
+          <% players.forEach(player => { %>
+            <option value="<%= player.username %>"><%= player.username %></option>
+          <% }) %>
+        </select>
+      </div>
+      <button type="submit">Select Player</button> <!-- Submit button -->
+    </form>
+
+    <form action="/newPlayer" method="POST">
+      <div class="new-player-container">
+        <label for="new-player">Or enter a new username:</label>
+        <input type="text" id="new-player" name="username" placeholder="New username">
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+
+  <script>
+    var wordList = <%- JSON.stringify(wordList) %>;
+  </script>
+  <script src="/script.js"></script>
+</body>
+</html>

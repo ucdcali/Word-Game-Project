@@ -1,0 +1,47 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  text-align: center; /* Center content */
+}
+
+.puzzle-container {
+  display: flex;
+  justify-content: center;
+  align-items: start; /* Align items at the start of the container */
+}
+
+table#wordSearchTable {
+  border-collapse: collapse;
+  margin-right: 20px; /* Adds space between the table and the word list */
+}
+
+td {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border: 1px solid #000;
+  font-size: 20px;
+}
+
+#wordListContainer {
+  text-align: left; /* Align the word list text to the left */
+}
+
+#wordListContainer h2 {
+  margin: 0 0 10px 0;
+}
+
+#wordListContainer p {
+  margin: 5px 0;
+}
+
+.highlighted {
+  background-color: yellow;
+}
+
+.correct {
+  background-color: green;
+}
